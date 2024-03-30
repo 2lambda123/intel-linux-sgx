@@ -13,6 +13,7 @@
 
 package com.intel.sgx.handlers;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,7 +73,7 @@ public class UpdateSigningKey extends SGXHandler {
 				Process q;
 				String opensslCmd = "openssl genrsa -out " + destinationKeyFile
 						+ " -3 3072";
-				q = Runtime.getRuntime().exec(opensslCmd);
+				q = SystemCommand.runCommand(Runtime.getRuntime(), opensslCmd);
 				BufferedReader stdInput = new BufferedReader(
 						new InputStreamReader(q.getInputStream()));
 				BufferedReader stdErr = new BufferedReader(

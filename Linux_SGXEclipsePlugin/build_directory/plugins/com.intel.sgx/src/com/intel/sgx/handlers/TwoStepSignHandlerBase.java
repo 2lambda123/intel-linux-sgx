@@ -13,6 +13,7 @@
 
 package com.intel.sgx.handlers;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -166,7 +167,7 @@ public abstract class TwoStepSignHandlerBase extends SGXHandler {
 			for (String arg : args){
 			}
 			String fullOutput = "";
-			q = Runtime.getRuntime().exec(allArgs);
+			q = SystemCommand.runCommand(Runtime.getRuntime(), allArgs);
 	
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(
 					q.getInputStream()));
