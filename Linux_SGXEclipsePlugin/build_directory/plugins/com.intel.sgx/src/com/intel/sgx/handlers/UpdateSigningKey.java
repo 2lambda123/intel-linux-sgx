@@ -13,6 +13,7 @@
 
 package com.intel.sgx.handlers;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,9 +79,9 @@ public class UpdateSigningKey extends SGXHandler {
 				BufferedReader stdErr = new BufferedReader(
 						new InputStreamReader(q.getErrorStream()));
 				String s = null;
-				while ((s = stdInput.readLine()) != null) {
+				while ((s = BoundedLineReader.readLine(stdInput, 5_000_000)) != null) {
 				}
-				while ((s = stdErr.readLine()) != null) {
+				while ((s = BoundedLineReader.readLine(stdErr, 5_000_000)) != null) {
 				}
 				project.refreshLocal(IResource.DEPTH_INFINITE, null);
 				if (q.exitValue() == 0){

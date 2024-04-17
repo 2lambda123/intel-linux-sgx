@@ -13,6 +13,7 @@
 
 package com.intel.sgx.discovery;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
@@ -172,7 +173,7 @@ public class SGXSDKDiscoveredPathInfo implements IDiscoveredPathInfo {
             Map<String, String> defines = new HashMap<String, String>();
 
             BufferedReader reader = new BufferedReader(new FileReader(infoFile));
-            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+            for (String line = BoundedLineReader.readLine(reader, 5_000_000); line != null; line = BoundedLineReader.readLine(reader, 5_000_000)) {
                 switch (line.charAt(0)) {
                     case 't':
                         timestamp = Long.valueOf(line.substring(2));

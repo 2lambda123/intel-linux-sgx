@@ -13,6 +13,7 @@
 
 package com.intel.sgx.discovery;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -73,10 +74,10 @@ public class SGXSDKDiscoveryUpdater {
             }
             
             BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
             while (line != null) {
                 checkBuildLine(line);
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
             }
 
             if (mCommand == null) {
@@ -257,7 +258,7 @@ public class SGXSDKDiscoveryUpdater {
             boolean inIncludes1 = false;
             boolean inIncludes2 = false;
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
             while (line != null) {
                 if (!inIncludes1) {
                     if (line.equals("#include \"...\" search starts here:")) //$NON-NLS-1$
@@ -276,7 +277,7 @@ public class SGXSDKDiscoveryUpdater {
                         }
                     }
                 }
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
             }
         } catch (IOException e) {
             Activator.log(e);
@@ -287,7 +288,7 @@ public class SGXSDKDiscoveryUpdater {
         try {
             Map<String, String> defines = new HashMap<String, String>();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
             while (line != null) {
                 if (line.startsWith("#define")) { //$NON-NLS-1$
                     Line l = new Line(line, 7);
@@ -299,7 +300,7 @@ public class SGXSDKDiscoveryUpdater {
                         value = ""; //$NON-NLS-1$
                     defines.put(var, value);
                 }
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
             }
             mPathInfo.setSymbols(defines);
         } catch (IOException e) {
