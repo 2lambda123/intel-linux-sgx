@@ -37,7 +37,7 @@ public class SdkPathVariableProvider extends PathVariableResolver {
 	
 	@Override
 	public String getValue(String variable, IResource resource) {
-		if(variable.equals("SGX_SDK_DIR_PATH")) {		
+		if("SGX_SDK_DIR_PATH".equals(variable)) {		
 			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 			String SDKPath = store.getString(PreferenceConstants.SDK_PATH);
 			IPath SDKCanonicalPath= new Path(SDKPath);

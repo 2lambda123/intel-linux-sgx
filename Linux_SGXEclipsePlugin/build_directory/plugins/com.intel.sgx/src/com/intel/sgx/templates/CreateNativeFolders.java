@@ -60,11 +60,11 @@ public class CreateNativeFolders extends ProcessRunner {
 
 		for (ProcessArgument arg : args) {
 			String argName = arg.getName();
-			if (argName.equals("projectName")) {
+			if ("projectName".equals(argName)) {
 				projectName = arg.getSimpleValue();
-			} else if (argName.equals("sourceFolders")) {
+			} else if ("sourceFolders".equals(argName)) {
 				sourceFolders = arg.getSimpleArrayValue();
-			} else if (argName.equals("outputFolders")) {
+			} else if ("outputFolders".equals(argName)) {
 				outputFolders = arg.getSimpleArrayValue();
 			}
 		}

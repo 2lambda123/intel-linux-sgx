@@ -26,7 +26,7 @@ public class ModuleCreationBaseHandler {
 				description = project.getDescription();
 				String[] natures = description.getNatureIds();
 				for(String nature: natures){
-					if(nature.equals("org.eclipse.cdt.core.ccnature"))
+					if("org.eclipse.cdt.core.ccnature".equals(nature))
 						isCPProject = true;
 				}
 			} catch (CoreException e) {

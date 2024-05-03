@@ -183,7 +183,7 @@ public abstract class TwoStepSignHandlerBase extends SGXHandler {
 			}
 			String result = out[i - 1];
 	
-			if (!result.equals("Succeed.")) {
+			if (!"Succeed.".equals(result)) {
 				// quitWithError("Error generating hash! " + out[i - 2]);
 				quitWithError("Error generating hash! " + fullOutput);
 			}

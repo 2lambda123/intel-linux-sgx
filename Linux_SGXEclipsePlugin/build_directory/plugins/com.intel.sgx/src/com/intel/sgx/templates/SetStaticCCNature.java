@@ -43,7 +43,7 @@ public class SetStaticCCNature extends ProcessRunner {
 		
 		for(ProcessArgument arg: args){
 			String argName = arg.getName();
-			if(argName.equals("projectName")){
+			if("projectName".equals(argName)){
 				projectName = arg.getSimpleValue();
 			}
 		}

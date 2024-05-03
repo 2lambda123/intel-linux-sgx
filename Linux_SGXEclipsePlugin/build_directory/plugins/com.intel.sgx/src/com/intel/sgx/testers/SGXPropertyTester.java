@@ -42,12 +42,12 @@ public class SGXPropertyTester extends PropertyTester {
 		
 
 
-		if (property.equals("twoStepsActive")) {
+		if ("twoStepsActive".equals(property)) {
 			IProject project = getProjectOfSelectedItem(receiver);
 			IManagedBuildInfo buildInfo = ManagedBuildManager.getBuildInfo(project);
 			return isHW(buildInfo) && isRelease(buildInfo) && !isPreRelease(buildInfo);
 
-		} else if (property.equals("sgxNatureAdded")) {
+		} else if ("sgxNatureAdded".equals(property)) {
 			IProject project = getProjectOfSelectedItem(receiver);
 			return true;
 		} else {
